@@ -64,7 +64,7 @@ class Graph:
         s.push(starting_vertex)
         # Create a set to store visited vertices
         visited = set()
-        # While queue not empty...
+        # While stack not empty...
         while s.size() > 0:
             # Pop the first vertex
             v = s.pop()
@@ -74,7 +74,7 @@ class Graph:
                 visited.add(v)
                 # debug
                 print(v)
-                # Then add all of its neighbors to the back of the queue
+                # Then add all of its neighbors to the back of the stack
                 for next_v in self.get_neighbors(v):
                     s.push(next_v)
 
@@ -85,8 +85,26 @@ class Graph:
 
         This should be done using recursion.
         """
-        
-
+        # Create and empty Stack
+        s = Stack()
+        # Push the starting vertex id
+        s.push(starting_vertex)
+        # Create a set to store visited vertices
+        visited = set()
+        # Check if stack in empty...
+        if s.size() > 0:
+            # Pop the first vertex
+            v = s.pop()
+            # if that vertex is not in visited...
+            if v not in visited:
+                # Mark it as visited..
+                visited.add(v)
+                # debug
+                print(v)
+                # Then add all of its neighbors to the back of the stack
+                for next_v in self.get_neighbors(next_v):
+                    s.push(next_v)
+             
 
 
     def bfs(self, starting_vertex, destination_vertex):
@@ -137,7 +155,7 @@ class Graph:
         s.push([starting_vertex])
         # Create a Set to store visited vertices
         visited = set()
-        # While the queue is not empty...
+        # While the stack is not empty...
         while s.size() > 0:
             # Pop the first PATH
             path = s.pop()
