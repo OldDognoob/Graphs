@@ -103,7 +103,9 @@ class Graph:
                 print(v)
                 # Then add all of its neighbors to the back of the stack
                 for next_v in self.get_neighbors(next_v):
-                    s.push(next_v)
+                    if next_v not in visited:
+                        self.dfs_recursive(next_v, visited)
+                    
              
 
 
