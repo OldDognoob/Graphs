@@ -1,15 +1,15 @@
-class Queue():
+class Stack():
     def __init__(self):
-        self.queue = []
-    def enqueue(self, value):
-        self.queue.append(value)
-    def dequeue(self):
+        self.stack = []
+    def push(self, value):
+        self.stack.append(value)
+    def pop(self):
         if self.size() > 0:
-            return self.queue.pop(0)
+            return self.stack.pop()
         else:
             return None
     def size(self):
-        return len(self.queue)
+        return len(self.stack)
 
 class Graph:
 
@@ -38,9 +38,54 @@ class Graph:
 
 # How to plan the problem:
 # initialize a graph
+# we have a relationship parent_child = pairs
 
 test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
 
 
 def earliest_ancestor(ancestors, starting_node):
-    pass
+   # initialize the graph
+   g = Graph()
+   # iterate through the ancestor list
+   for p,c in ancestors:
+       # add key in tuple at current index as vertex in graph
+       g.add_vertex(p)
+       # add key in tuple at current index as vertex in graph
+       g.add_vertex(c)
+       # connect the keys with the add_edge method
+       g.add_edge(g.add_vertex(p),g.add_vertex(c))
+   # Create an empty stack
+   s = Stack()
+   # Push a path the starting node
+   s.push([starting_node])
+   # Create a set to store visited vertices
+   # visited = set()
+   farthest_path_len = 1
+   earliest_ancestor = -1
+   # While the stack is empty
+   while s.size()>0:
+       # Pop the first PATH
+       path = s.pop()
+       p = path[-1]
+       # if the length of the path longer/equal to the farthest_path length and the vertex is less than the current value of earliest_ancestor
+       # OR the length of the current path is more than the farthest_path length
+       if (len(path) >= farthest_path_len and p < earliest_ancestor) or (len(path) > farthest_path_len):
+           # set the earliest_ancestor equal to p
+           earliest_ancestor = p
+           # set the farthest_path length equal to the length of the current path
+           farthest_path_len = len(path)
+       # Then add A PATH TO its neighbors to the back of the stack
+       for neighbor in g.vertices[p]: 
+           # copy the contents of the current path to a new path list
+           copy_path = list(path)
+           # APPEND THE neighbor TO THE BACK
+           copy_path.append(neighbor)
+           s.push(copy_path)
+           return earliest_ancestor
+
+
+
+
+
+       
+    
