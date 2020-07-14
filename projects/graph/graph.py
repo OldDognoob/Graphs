@@ -185,22 +185,22 @@ class Graph:
         if path is None:
             # Create list to store the path
             path = []
-        # Mark starting node as visited
+        # Add starting vertex as visited set
         visited.add(starting_vertex)
-        # Mark vertex to the path
+        # Concatonate the starting vert path to the current path
         path = path + [starting_vertex]
-        #  CHECK IF IT'S THE TARGET
+        #  Check if the starting vertex is equal to the target value
         if starting_vertex == destination_vertex:
-            # IF SO, RETURN PATH
+            # If so, return the path
             return path
         # Otherwise, perform DFS_recursive on each unvisited neighbor
-        for neighbor in self.get_neighbors(starting_vertex):
+        for child_vertex in self.get_neighbors(starting_vertex):
             # if neighbor not visited
-            if neighbor not in visited:
+            if child_vertex not in visited:
                 # add a new path
-                new_path = self.dfs_recursive(neighbor, destination_vertex, visited, path)
-                # Check new path if is not there
-                if new_path is not None:
+                new_path = self.dfs_recursive(child_vertex, destination_vertex, visited, path)
+                # Check new path if is returning something 
+                if new_path:
                     # return new path
                     return new_path
                     # else return None
