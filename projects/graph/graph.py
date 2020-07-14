@@ -89,9 +89,9 @@ class Graph:
         if visited is None:
             # If not, initialize a set to store visited
             visited = set() 
-        # Print the node as visited
+        # Print the vertex as visited
         print(starting_vertex)
-        # Mark the node as visited
+        # Mark the vertex as visited
         visited.add(starting_vertex)
         # Call DFT recursive on each neighbor that has not been visited
         for neighbor in self.get_neighbors(starting_vertex):
