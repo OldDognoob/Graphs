@@ -1,5 +1,17 @@
 import random
 
+class Queue():
+    def __init__(self):
+        self.queue = []
+    def enqueue(self, value):
+        self.queue.append(value)
+    def dequeue(self):
+        if self.size() > 0:
+            return self.queue.pop(0)
+        else:
+            return None
+    def size(self):
+        return len(self.queue)
 class User:
     def __init__(self, name):
         self.name = name
@@ -68,12 +80,40 @@ class SocialGraph:
     def get_all_social_paths(self, user_id):
         """
         Takes a user's user_id as an argument
+
         Returns a dictionary containing every user in that user's
         extended network with the shortest friendship path between them.
+        
         The key is the friend's ID and the value is the path.
+
+        Breath-First Traversal 
+        Because it returns a list containing the shortest path from the start to the end
         """
         visited = {}  # Note that this is a dictionary, not a set
-        # !!!! IMPLEMENT ME
+        # Create an empty queue
+        q = Queue()
+        # Enqueue a PATH to the starting of the vertex id
+        q.enqueue([user_id])
+        # Friend's ID is equal with the key and Path is equal with the value
+        # Create a dictionary as default
+        visited[user_id] = [user_id]
+        # While the queue is not empty...
+        while q.size() > 0:
+            # remove the first path list from the queue
+            path = q.dequeue()
+            # set vert equal to the id of the last vert in the path list
+            v = path[-1]
+            # if that vertex is not in visited..
+            if v not in visited:
+                # set visitied as path
+                visited[v] = path
+                # Then add all of its friends to the back of the queue
+                for v in self.friendships[v]:
+                    # copy the contents of the current path to a new path list
+                    copy_path = list(path)
+                    # APPEND THE friend TO THE BACK
+                    copy_path.append(v)
+                    q.enqueue(copy_path)
         return visited
 
 
