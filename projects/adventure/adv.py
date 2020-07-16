@@ -29,6 +29,16 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
+# The main purpose is:
+# To explore the connecting rooms by walking from room to room
+# and keep in track our directions using the fastest sufficient search.
+
+# What we need to bare in mind:
+# these '?' are unexplored rooms
+# we are recording the direction we took to get into the room so the "traversal_path" will be 
+# later populated with 500 rooms of the maze
+# we adding reverse directions se we can move backwards if we need to
+reverse_directions = {'n':'s', 's':'n','w':'e','e':'w'}
 
 
 # TRAVERSAL TEST
