@@ -106,11 +106,11 @@ class SocialGraph:
                 # set visitied as path
                 visited[v] = path
                 # Then add all of its friends to the back of the queue
-                for v in self.friendships[v]:
+                for friend in self.friendships[v]:
                     # copy the contents of the current path to a new path list
                     copy_path = list(path)
                     # APPEND THE friend TO THE BACK
-                    copy_path.append(v)
+                    copy_path.append(friend)
                     q.enqueue(copy_path)
         return visited
 
