@@ -77,7 +77,7 @@ class SocialGraph:
             friendship = possible_friendships[i]
             self.add_friendship(friendship[0], friendship[1])
 
-    def get_all_social_paths(self, user_id):
+    def get_all_social_paths(self, user_id): # quadratic
         """
         Takes a user's user_id as an argument
 
@@ -94,9 +94,7 @@ class SocialGraph:
         q = Queue()
         # Enqueue a PATH to the starting of the vertex id
         q.enqueue([user_id])
-        # Friend's ID is equal with the key and Path is equal with the value
-        # Create a dictionary as default
-        visited[user_id] = [user_id]
+       
         # While the queue is not empty...
         while q.size() > 0:
             # remove the first path list from the queue
