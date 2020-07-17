@@ -30,7 +30,7 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
-traversal_path = build_path(room_graph)
+
 
 # TRAVERSAL TEST
 visited_rooms = set()
