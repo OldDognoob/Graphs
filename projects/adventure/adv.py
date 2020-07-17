@@ -5,6 +5,7 @@ from world import World
 import random
 from ast import literal_eval
 
+
 # Load world
 world = World()
 
@@ -29,7 +30,7 @@ player = Player(world.starting_room)
 # traversal_path = ['n', 'n']
 traversal_path = []
 
-
+traversal_path = build_path(room_graph)
 
 # TRAVERSAL TEST
 visited_rooms = set()
@@ -41,17 +42,18 @@ for move in traversal_path:
     visited_rooms.add(player.current_room)
 
 if len(visited_rooms) == len(room_graph):
-    print(f"TESTS PASSED: {len(traversal_path)} moves, {len(visited_rooms)} rooms visited")
+    print(
+        f"TESTS PASSED: {len(traversal_path)} moves, {len(visited_rooms)} rooms visited")
 else:
     print("TESTS FAILED: INCOMPLETE TRAVERSAL")
     print(f"{len(room_graph) - len(visited_rooms)} unvisited rooms")
-
 
 
 #######
 # UNCOMMENT TO WALK AROUND
 #######
 player.current_room.print_room_description(player)
+breakpoint()
 while True:
     cmds = input("-> ").lower().split(" ")
     if cmds[0] in ["n", "s", "e", "w"]:
