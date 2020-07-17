@@ -83,7 +83,7 @@ player = Player(world.starting_room)
 # we are recording the direction we took to get into the room so the "traversal_path" will be 
 # later populated with 500 rooms of the maze
 # we adding reverse directions se we can move backwards if we need to
-reverse_directions = {'n':'s', 's':'n','w':'e','e':'w'}
+directions = {'n':'s', 's':'n','w':'e','e':'w'}
 # player.current_room.id => This will give us the current room id
 # player.current_room.get_exits() => it points out a return list of possible moves
 # player.travel(direction) => This will allow us to traverse to rooms
