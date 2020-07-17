@@ -127,16 +127,18 @@ def build_path(graph, starting_room = 0):
         # assign the next room
         # if we reached a dead end, reverse back
         if len(unexplored) > 0:
-            # our next room is unexplored
+            # if our next room is unexplored push the next room onto the stack
             next_room = unexplored[0]
             s.push(next_room)
         else:
+            # otherwise remove the next room and exit the traversal path
             s.pop()
             next_room = s.end()
 
         # explore the rooms around our current room. 
         # if the next move matches the room_id, add that to moves
-        # adjacent id to set to the next room
+        # adjacent id in rooms dict is the same with the next room add the direction to the 
+        # traversal path and move to the next room
         for direction, adjacent_id in rooms_dict.items():
             if adjacent_id == next_room:
                 moves.append(direction)
