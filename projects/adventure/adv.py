@@ -38,8 +38,37 @@ traversal_path = []
     # player.travel(get_room_in_direction) --> gives us in which direction we want to move in the room we are.
     
     
+# PLAYER AND ROOM DESCRIPTION METHODOLOGY
+# Do we explored the room?
+    # No:
+        # if this room is not explored does it has any doors?
+            # If Yes:
+                # 1. How many doors we seeing?
+                # 2. Store the doors in dictionary
+                # 3. move towards one door
+                # 4. remove the door we stored
+                # 5. add directions to our path
+                # 6. update exploration
+                # 7. check again
+            # if No:
+                # 1. Return (reverse) back to our previous room(were we came from)
+                # 2. Add directions to our path
+                # 3. Check for another door(not the same one)-take a look at our storage(dictionary)
 
-# A dictionary to store our rooms
+    # Yes:
+        # Are there any doors left that needed to be explored?
+            # if yes (move line 45 and follow the steps)
+            # if no:
+                # 1. Return (reverse) back to our previous room
+                # 2. Add directions to our path
+                # 3. Check for another door(not the same one)- take a look at our storage(dictionary)
+
+# MVP
+# We hit the jackpot when we reach our FINISH LINE visiting all the rooms of our maze(500)
+# Goal ---> to traverse the graph by using as much as less steps < 2000
+# Project MVP 1995 < 2000 !!!!!
+
+# A dictionary to store rooms and their doors
 visited = dict()
 
 # direction for reverse navigation
@@ -63,7 +92,7 @@ while len(visited) < len(world.rooms):
             # visit the last room
             next_room = visited[player.current_room.id].pop()
             print("pop", next_room)
-            # save the reverse_nav!!
+            # save the directions for the reverse_nav!!
             stack.push(next_room)
             # Then append the direction to the traversal path
             traversal_path.append(next_room)
@@ -74,7 +103,7 @@ while len(visited) < len(world.rooms):
             # get the last directions from the previous room 
             # were you stored them in the stack
             directions = stack.pop()
-            # get the opposites ones
+            # get the opposites ones directions
             prev_room = reverse_nav[directions]
             # move to the previous room
             player.travel(prev_room)
