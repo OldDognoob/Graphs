@@ -38,30 +38,15 @@ traversal_path = []
     # player.travel(get_room_in_direction) --> gives us in which direction we want to move in the room we are.
     
     
-# PLAYER AND ROOM DESCRIPTION METHODOLOGY
-# Do we explored the room?
-    # No:
-        # if this room is not explored does it has any doors?
-            # If Yes:
-                # 1. How many doors we seeing?
-                # 2. Store the doors in dictionary
-                # 3. move towards one door
-                # 4. remove the door we stored
-                # 5. add directions to our path
-                # 6. update exploration
-                # 7. check again
-            # if No:
-                # 1. Return (reverse) back to our previous room(were we came from)
-                # 2. Add directions to our path
-                # 3. Check for another door(not the same one)-take a look at our storage(dictionary)
-
-    # Yes:
-        # Are there any doors left that needed to be explored?
-            # if yes (move line 45 and follow the steps)
-            # if no:
-                # 1. Return (reverse) back to our previous room
-                # 2. Add directions to our path
-                # 3. Check for another door(not the same one)- take a look at our storage(dictionary)
+# GENERAL IDEA & DESCRIPTION SOLUTION
+    # If the current room has not visited, using if statement, I check the array length where the number
+    # (index) for visited rooms are stored(Line 91). If this number is not 0, that means that there are rooms
+    # to be visited. In that case I follow the procedure to visit the next room,
+    # otherwise(there are no rooms to be visited) the player is in deadend or in the last room(Line 102).
+    # The same procedure is executed for each room the player has visited(Line 113) as well. This repeated
+    # procedure belongs to the outer if statement (Line 87).
+    # All of them are repeated with the while loop (Line 85) until the number of visited rooms is equal with 
+    # the number of the rooms I have to visit.
 
 # MVP
 # We hit the jackpot when we reach our FINISH LINE visiting all the rooms of our maze(500)
@@ -83,16 +68,16 @@ stack.push(player.current_room)
 # Fire in the hole!
 # while looping the length of the rooms we visited less than the length of our 500 maze
 while len(visited) < len(world.rooms):
-    # if the room we are looking for doesn't exist in our dict
+    # if the room doesn't exist in our dict
     if player.current_room.id not in visited:
         # add to dictionary, with values(directions)
         visited[player.current_room.id] = player.current_room.get_exits()
-        # for every connected room that hasn't been visited, then visit !
+        # for every room that hasn't been visited, then visit !
         if len(visited[player.current_room.id]) is not 0:
-            # visit the last room
+            # visit the next room
             next_room = visited[player.current_room.id].pop()
             print("pop", next_room)
-            # save the directions for the reverse_nav!!
+            # save the directions  to the stack for the reverse_nav!!
             stack.push(next_room)
             # Then append the direction to the traversal path
             traversal_path.append(next_room)
